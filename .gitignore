@@ -1,3 +1,6 @@
 # ignore node_modules
 *node_modules/
 
+# ignore db_file
+board_data.sqlite3
+
