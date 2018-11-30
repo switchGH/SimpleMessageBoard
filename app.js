@@ -2,7 +2,7 @@ var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+var logger = require('morgan');// httpリクエストのログを吐き出す
 // var favicon = require('server-favicon');// ファビコン(画像icon)を表示する
 var bodyParser = require('body-parser');
 var session = require('express-session');
@@ -15,10 +15,10 @@ var home = require('./routes/home');
 var app = express();
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views')); //viewテンプレートが入ったフォルダ設定
+app.set('view engine', 'ejs');// viewテンプレートエンジン設定
 
-app.use(logger('dev'));
+app.use(logger('dev'));// ログの出力方法の設定
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());

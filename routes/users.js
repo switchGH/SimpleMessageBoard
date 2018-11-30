@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
+//JavaScript用のSQL Query Builder
 var knex = require('knex') ({
   dialect: 'sqlite3',
   connection: {
@@ -9,21 +10,24 @@ var knex = require('knex') ({
   useNullAsDefault: true
 });
 
-var Bookshelf = require('bookshelf')(knex);
+var Bookshelf = require('bookshelf')(knex);// ユーザー認証を行う
 
+//ユーザーモデル
 var User = Bookshelf.Model.extend({
   tableName: 'users'
 });
 
+// アカウント作成ページの処理
 router.get('/add', function(req, res, next){
   var data = {
     title: 'User/Add',
     form: {name:'', password: '', comment:''},
     content: '＊登録する名前・パスワード・コメントを入力してください。'
   };
-  res.render('users/add', data);
+  res.render('users/add', data);// /add.ejsをレンダリング
 });
 
+// アカウント作成ページの処理
 router.post('/add', function(req, res, next){
   var request = req;
   var response = res;
@@ -52,15 +56,17 @@ router.post('/add', function(req, res, next){
   });
 });
 
+// ログインページの処理
 router.get('/', function(req, res, next) {
   var data = {
     title: 'Users/Login',
     form: {name: '', password: ''},
     content: '名前とパスワードを入力してください。'
   };
-  res.render('users/login', data);
+  res.render('users/login', data);// login.ejsをレンダリング
 });
 
+//ログインページの処理
 router.post('/', function(req, res, next) {
   var request = req;
   var response = res;

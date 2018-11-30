@@ -16,9 +16,10 @@ var User = Bookshelf.Model.extend({
   tableName: 'users'
 });
 
+// テーブルにアクセスするモデルを作成
 var Message = Bookshelf.Model.extend({
   tableName: 'message',
-  hasTimestamps: true,
+  hasTimestamps: true, //タイムスタンプのデータをレコードに追加する
   user: function(){
     return this.belongsTo(User);
   }
@@ -42,6 +43,7 @@ router.get('/:page', function(req, res, next){
   if (pg < 1){
     pg = 1;
   }
+  //アソシエーションを使いレコード取得
   new Message().orderBy('created_at', 'DESC')
     .fetchPage({page:pg, pageSize:10, withRelated: ['user']})
     .then(function(collection){
