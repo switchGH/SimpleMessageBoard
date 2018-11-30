@@ -18,10 +18,10 @@
             <% } %>
             </table></p>
             <p>
-                <% if (pagination.page >　1){ %>
-                <span><a href="/home/<%=user_id %>/<%= pagination.page -1 %>">&lt;&lt; prev</a></span>
+            <% if (pagination.page >　1){ %>
+            <span><a href="/home/<%= user_id %>/<%= pagination.page -1 %>">&lt;&lt; prev</a></span>
             <% } else { %>
-                <span>&lt;&lt; prev</span>
+            <span>&lt;&lt; prev</span>
             <% } %>
 
             <% if (pagination.page < pagination.pageCount) { %>
@@ -30,7 +30,7 @@
             <span>Next &gt;&gt;</span>
             < % } %>
             </p>
-            <p></p>
+            <p> </p>
             <p><a href="/">&lt;&lt; Top</p>
         </div>
     </body>

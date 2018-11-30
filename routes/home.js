@@ -18,14 +18,18 @@ var User = Bookshelf.Model.extend({
 });
 
 var Message = Bookshelf.Model.extend({
-  tableName: 'message',
+  tableName: 'messages',
   hasTimestamps: true,
   user: function(){
     return this.belogsTo(User);
   }
-})
+});
 
 router.get('/', function(req, res, next) {
+  res.redirect('/');
+});
+
+router.get('/:id', function(req, res, next){
   res.redirect('/home/' + req.params.id + '/1');
 });
 
@@ -37,7 +41,7 @@ router.get('/:id/:page', function(req, res, next) {
   if(pg < 1){
     pg = 1;
   }
-  new Message().orderBy('correct_at', 'DESC')
+  new Message().orderBy('created_at', 'DESC')
     .where('user_id', '=', id)
     .fetchPage({page:pg, pageSize: 10, withRelated: ['user']})
     .then(function(collection){

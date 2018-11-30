@@ -42,7 +42,7 @@ router.post('/add', function(req, res, next){
         content: content,
         form: req.body
       };
-      response.render('users/add', add);
+      response.render('users/add', data);
     }else{
       request.session.login = null;
       new User(req.body).save().then(function(model){
@@ -78,7 +78,7 @@ router.post('/', function(req, res, next) {
       content: content,
       form: req.body
     };
-    response.render('users/login', add);
+    response.render('users/login', data);
   }else{
     var nm = req.body.name;
     var pw = req.boby.password;
@@ -92,6 +92,14 @@ router.post('/', function(req, res, next) {
             form: req.body
           };
           response.render('users/login', data);
+        }else{
+          request.session.login = model.attributes;
+          var data = {
+            title: 'User/Login',
+            content: '<p>ログインしました！<br>トップページに戻ってメッセージを送信してください。</p>',
+            form: req.boby
+          };
+          response.render('user/login', data);
         }
       });
   }

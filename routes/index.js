@@ -27,7 +27,6 @@ var Message = Bookshelf.Model.extend({
 router.get('/', function(req, res, next) {
   if(req.session.login == null){
     res.redirect('/users');
-    return;
   }else{
     res.redirect('/1');
   }
